@@ -4,6 +4,9 @@ export const resolvers: Resolvers = {
     Query: {
         tracksForHome: async (_, __, {dataSources}) => {
             return dataSources.trackAPI.getTracksForHome();
+        },
+        track: async (_, {trackId}, {dataSources}) => {
+            return dataSources.trackAPI.getTrack(trackId)
         }
     },
     Track: {
