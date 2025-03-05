@@ -5,4 +5,4 @@ node_modules
 */**/types.ts
 */**/__generated__
 .idea
-master..
+master...
