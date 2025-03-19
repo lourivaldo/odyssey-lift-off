@@ -15,7 +15,7 @@ on:
 
 jobs:
   prlint:
-    name: PR sizing (files x commits x changes)
+    name: PR sizing (files  x commits x changes)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
