@@ -1,0 +1,36 @@
+name: Git checks
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - beta
+      - hotfix
+      - industry-beta
+      - mercashop-beta
+      - mkt-intel-beta
+      - cons-eng-beta
+      - foundation-beta
+
+jobs:
+  prlint:
+    name: PR sizing (files x commits x changes)
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y curl jq
+      - name: Lint PR size
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_NUMBER: ${{ github.event.number }}
+        shell: bash
+        run: |
+          chmod +x .github/check_pr_size.sh
+          .github/check_pr_size.sh
