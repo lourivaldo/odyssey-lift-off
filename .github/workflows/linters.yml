@@ -1,0 +1,70 @@
+name: Git checks
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - beta
+      - hotfix
+      - industry-beta
+      - mercashop-beta
+      - mkt-intel-beta
+      - cons-eng-beta
+      - foundation-beta
+
+jobs:
+  commitlint:
+    name: Conventional commits
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      - name: yarn.lock
+        run: |
+          if [ ! -f "yarn.lock" ]; then
+            echo "" > "yarn.lock"
+      - name: Install conventional config
+        run: npm i -g @commitlint/config-conventional
+      - name: Check conventional commits
+        run: npx commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2) --verbose
+  branchlint:
+    name: Branch lint
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Lint branch name
+        shell: bash
+        run: |
+          chmod +x .github/check_branch_naming.sh
+          .github/check_branch_naming.sh
+  prlint:
+    name: PR sizing (files x commits x changes)
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y curl jq
+      - name: Lint PR size
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_NUMBER: ${{ github.event.number }}
+        shell: bash
+        run: |
+          chmod +x .github/check_pr_size.sh
+          .github/check_pr_size.sh
