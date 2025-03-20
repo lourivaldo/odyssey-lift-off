@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'npm'
-      - name: create lock
+      - name: Create lock
         run: |
           if [ ! -f "yarn.lock" ]; then
             echo "" > "yarn.lock"
