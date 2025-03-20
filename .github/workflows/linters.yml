@@ -31,6 +31,7 @@ jobs:
         run: |
           if [ ! -f "yarn.lock" ]; then
             echo "" > "yarn.lock"
+          fi
       - name: Install conventional config
         run: npm i -g @commitlint/config-conventional
       - name: Check conventional commits
