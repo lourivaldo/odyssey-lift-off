@@ -15,7 +15,7 @@ on:
 
 jobs:
   commitlint:
-    name: Conventional commits
+    name: Conventional commits 1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
