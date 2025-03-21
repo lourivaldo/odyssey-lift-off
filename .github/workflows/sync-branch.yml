@@ -52,9 +52,8 @@ jobs:
           git push --force-with-lease
       - name: Send Slack Notification
         if: steps.sync-hotfix.outcome == 'failure'
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{
-            "text": ":x: *GitHub Action Failed!*\nRepo: ${{ github.repository }}\nBranch: ${{ github.ref }}\nCommit: ${{ github.sha }}\nTriggered by: ${{ github.actor }}",
-            "username": "GitHub Actions",
-            "icon_emoji": ":github:"
-          }' ${{ env.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
+        uses: slackapi/slack-github-action@v1
+        with:
+          slack-message: "🚨 *GitHub Action Failed!* Repo: ${{ github.repository }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ env.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
