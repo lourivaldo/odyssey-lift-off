@@ -58,9 +58,34 @@ jobs:
           webhook: ${{ secrets.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*GitHub Branch Sync [failed]*:\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n"
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*:white_check_mark: Succeeded GitHub Actions*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Repo*\nwdwd"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build Logs*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Logs>"
+                    }
+                  ]
+                }
+              ]
+            }
+#          payload: |
+#            text: "*GitHub Branch Sync [failed]*:\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+#            blocks:
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n"
