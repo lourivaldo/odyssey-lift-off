@@ -3,7 +3,7 @@ name: rebase
 on:
   pull_request:
     branches:
-      - *
+      - "**"
 
 permissions:
   contents: write
