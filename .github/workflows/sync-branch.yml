@@ -64,7 +64,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*:white_check_mark: Succeeded GitHub Actions*"
+                    "text": "*:white_check_mark: GitHub Branch Sync [failed]*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n*"
                   }
                 },
                 {
@@ -72,7 +79,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Repo*\nwdwd"
+                      "text": "*Repo*\n<https://github.com/${{ github.repository }}|${{ github.repository }}>"
                     },
                     {
                       "type": "mrkdwn",
@@ -82,10 +89,3 @@ jobs:
                 }
               ]
             }
-#          payload: |
-#            text: "*GitHub Branch Sync [failed]*:\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-#            blocks:
-#              - type: "section"
-#                text:
-#                  type: "mrkdwn"
-#                  text: "Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n"
