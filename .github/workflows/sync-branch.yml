@@ -58,9 +58,9 @@ jobs:
           webhook: ${{ secrets.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*GitHub Action build result*: ${{ steps.sync-hotfix }}"
+            text: "*GitHub Action build result*: ${{ steps.sync-hotfix.outcome }}"
             blocks:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "Sync hotfix: ${{ steps.sync-hotfix }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta }}\n"
+                  text: "Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n"
