@@ -71,7 +71,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Sync `hotfix`: ${{ steps.sync-hotfix.outcome }}\nSync `cons-eng-beta`: ${{ steps.sync-cons-eng-beta.outcome }}\n"
+                    "text": "Sync `hotfix` _${{ steps.sync-hotfix.outcome }}_\nSync `cons-eng-beta` _${{ steps.sync-cons-eng-beta.outcome }}_\n"
                   }
                 },
                 {
