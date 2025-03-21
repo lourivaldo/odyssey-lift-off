@@ -56,4 +56,4 @@ jobs:
         with:
           slack-message: "🚨 *GitHub Action Failed!* Repo: ${{ github.repository }}"
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ vars.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
