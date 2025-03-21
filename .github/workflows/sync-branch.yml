@@ -30,38 +30,46 @@ jobs:
           git checkout hotfix
           git rebase ${{ github.event.repository.default_branch }}
           git push --force-with-lease
+      - name: Check [cons-eng-beta] exists
+        run: |
+          if git ls-remote --exit-code --heads origin cons-eng-beta; then
+            echo "exists-cons-eng-beta=true" >> $GITHUB_ENV
+          else
+            echo "exists-cons-eng-beta=false" >> $GITHUB_ENV
+          fi
       - name: Sync [cons-eng-beta] branch
+        if: env.exists-cons-eng-beta == 'true'
         run: |
           git checkout ${{ github.event.repository.default_branch }}
           git fetch origin
           git checkout cons-eng-beta
           git rebase ${{ github.event.repository.default_branch }}
           git push --force-with-lease
-      - name: Sync [mkt-intel-beta] branch
-        run: |
-          git checkout ${{ github.event.repository.default_branch }}
-          git fetch origin
-          git checkout mkt-intel-beta
-          git rebase ${{ github.event.repository.default_branch }}
-          git push --force-with-lease
-      - name: Sync [mercashop-beta] branch
-        run: |
-          git checkout ${{ github.event.repository.default_branch }}
-          git fetch origin
-          git checkout mercashop-beta
-          git rebase ${{ github.event.repository.default_branch }}
-          git push --force-with-lease
-      - name: Sync [industry-beta] branch
-        run: |
-          git checkout ${{ github.event.repository.default_branch }}
-          git fetch origin
-          git checkout industry-beta
-          git rebase ${{ github.event.repository.default_branch }}
-          git push --force-with-lease
-      - name: Sync [foundation-beta] branch
-        run: |
-          git checkout ${{ github.event.repository.default_branch }}
-          git fetch origin
-          git checkout foundation-beta
-          git rebase ${{ github.event.repository.default_branch }}
-          git push --force-with-lease
+#      - name: Sync [mkt-intel-beta] branch
+#        run: |
+#          git checkout ${{ github.event.repository.default_branch }}
+#          git fetch origin
+#          git checkout mkt-intel-beta
+#          git rebase ${{ github.event.repository.default_branch }}
+#          git push --force-with-lease
+#      - name: Sync [mercashop-beta] branch
+#        run: |
+#          git checkout ${{ github.event.repository.default_branch }}
+#          git fetch origin
+#          git checkout mercashop-beta
+#          git rebase ${{ github.event.repository.default_branch }}
+#          git push --force-with-lease
+#      - name: Sync [industry-beta] branch
+#        run: |
+#          git checkout ${{ github.event.repository.default_branch }}
+#          git fetch origin
+#          git checkout industry-beta
+#          git rebase ${{ github.event.repository.default_branch }}
+#          git push --force-with-lease
+#      - name: Sync [foundation-beta] branch
+#        run: |
+#          git checkout ${{ github.event.repository.default_branch }}
+#          git fetch origin
+#          git checkout foundation-beta
+#          git rebase ${{ github.event.repository.default_branch }}
+#          git push --force-with-lease
