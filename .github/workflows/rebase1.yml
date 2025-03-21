@@ -23,10 +23,45 @@ jobs:
         run: |
           git config user.name "Branch Sync"
           git config user.email "foundation@mercafacil.com"
-      - name: Update Test Branch
+      - name: Sync [hotfix] branch
         run: |
           git checkout ${{ github.event.repository.default_branch }}
           git fetch origin
           git checkout hotfix
+          git rebase ${{ github.event.repository.default_branch }}
+          git push --force-with-lease
+      - name: Sync [cons-eng-beta] branch
+        run: |
+          git checkout ${{ github.event.repository.default_branch }}
+          git fetch origin
+          git checkout cons-eng-beta
+          git rebase ${{ github.event.repository.default_branch }}
+          git push --force-with-lease
+      - name: Sync [mkt-intel-beta] branch
+        run: |
+          git checkout ${{ github.event.repository.default_branch }}
+          git fetch origin
+          git checkout mkt-intel-beta
+          git rebase ${{ github.event.repository.default_branch }}
+          git push --force-with-lease
+      - name: Sync [mercashop-beta] branch
+        run: |
+          git checkout ${{ github.event.repository.default_branch }}
+          git fetch origin
+          git checkout mercashop-beta
+          git rebase ${{ github.event.repository.default_branch }}
+          git push --force-with-lease
+      - name: Sync [industry-beta] branch
+        run: |
+          git checkout ${{ github.event.repository.default_branch }}
+          git fetch origin
+          git checkout industry-beta
+          git rebase ${{ github.event.repository.default_branch }}
+          git push --force-with-lease
+      - name: Sync [foundation-beta] branch
+        run: |
+          git checkout ${{ github.event.repository.default_branch }}
+          git fetch origin
+          git checkout foundation-beta
           git rebase ${{ github.event.repository.default_branch }}
           git push --force-with-lease
