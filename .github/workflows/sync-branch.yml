@@ -44,6 +44,7 @@ jobs:
       - name: Sync [cons-eng-beta] branch
         continue-on-error: true  # Allows the job to continue
         if: env.exists-cons-eng-beta == 'true'
+        id: sync-cons-eng-beta
         run: |
           git checkout ${{ github.event.repository.default_branch }}
           git fetch origin
@@ -54,12 +55,12 @@ jobs:
         if: steps.sync-hotfix.outcome == 'failure'
         uses: slackapi/slack-github-action@v2.0.0
         with:
-          webhook: ${{ vars.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
+          webhook: ${{ secrets.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            text: "*GitHub Action build result*: ${{ steps.sync-hotfix }}"
             blocks:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  text: "Sync hotfix: ${{ steps.sync-hotfix }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta }}\n"
