@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   sync-branches:
-    runs-on: [ ubuntu-latest ]
+    runs-on: ubuntu-latest
     name: Syncing branches
     steps:
       - name: Checkout
@@ -45,3 +45,14 @@ jobs:
           git checkout cons-eng-beta
           git rebase ${{ github.event.repository.default_branch }}
           git push --force-with-lease
+  notify-slack:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": ":x: *GitHub Action Failed!*\nRepo: ${{ github.repository }}\nBranch: ${{ github.ref }}\nCommit: ${{ github.sha }}\nTriggered by: ${{ github.actor }}",
+            "username": "GitHub Actions",
+            "icon_emoji": ":github:"
+          }' ${{ env.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
