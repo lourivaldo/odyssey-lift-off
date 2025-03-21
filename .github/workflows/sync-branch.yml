@@ -64,14 +64,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*:white_check_mark: GitHub Branch Sync [failed]*"
+                    "text": "*:error: GitHub Branch Sync [failed]*"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Sync hotfix: ${{ steps.sync-hotfix.outcome }}\nSync cons-eng-beta: ${{ steps.sync-cons-eng-beta.outcome }}\n*"
+                    "text": "Sync `hotfix`: ${{ steps.sync-hotfix.outcome }}\nSync `cons-eng-beta`: ${{ steps.sync-cons-eng-beta.outcome }}\n"
                   }
                 },
                 {
