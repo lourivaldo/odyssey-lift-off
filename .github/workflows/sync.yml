@@ -1,11 +1,9 @@
 name: rebase
 
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        required: true
-        type: string
+  pull_request:
+    branches:
+      - *
 
 permissions:
   contents: write
