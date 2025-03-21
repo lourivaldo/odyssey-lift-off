@@ -64,7 +64,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*:error: GitHub Branch Sync [failed]*"
+                    "text": "*:red_circle: GitHub Branch Sync [failed]*"
                   }
                 },
                 {
