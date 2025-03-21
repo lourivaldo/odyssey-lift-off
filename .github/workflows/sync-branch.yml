@@ -10,6 +10,10 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  # Setting an environment variable with the value of a configuration variable
+  SYNC_BRANCH_SLACK_WEBHOOK_URL: ${{ vars.SYNC_BRANCH_SLACK_WEBHOOK_URL }}
+
 jobs:
   sync-branches:
     runs-on: ubuntu-latest
